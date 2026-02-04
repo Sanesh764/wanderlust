@@ -1,0 +1,129 @@
+<!-- Airbnb-Style Navbar -->
+<nav class="airbnb-navbar">
+  <div class="navbar-container">
+    <!-- Logo Section -->
+    <div class="navbar-logo">
+      <a href="/listings">
+        <i class="fa-brands fa-airbnb"></i>
+        <span class="logo-text">wanderlust</span>
+      </a>
+    </div>
+
+    <!-- Search Bar Section (Desktop) -->
+    <div class="navbar-search-desktop">
+      <form action="/listings" method="GET" class="search-form">
+        <div class="search-wrapper">
+          <div class="search-input-group">
+            <label>Where</label>
+            <input type="text" name="search" placeholder="Search destinations"
+              value="<%= typeof search !== 'undefined' ? search : '' %>" autocomplete="off">
+          </div>
+          <div class="search-divider"></div>
+          <div class="search-input-group">
+            <label>Check in</label>
+            <input type="text" placeholder="Add dates" readonly>
+          </div>
+          <div class="search-divider"></div>
+          <div class="search-input-group">
+            <label>Check out</label>
+            <input type="text" placeholder="Add dates" readonly>
+          </div>
+          <div class="search-divider"></div>
+          <div class="search-input-group guests-input">
+            <label>Guests</label>
+            <input type="text" placeholder="Add guests" readonly>
+          </div>
+          <button type="submit" class="search-btn">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Right Side Menu -->
+    <div class="navbar-menu">
+      <a href="/listings/new" class="airbnb-home-link">
+        Airbnb your home
+      </a>
+
+      <div class="user-menu">
+        <button class="menu-toggle">
+          <i class="fa-solid fa-bars"></i>
+          <i class="fa-solid fa-circle-user"></i>
+        </button>
+        <div class="dropdown-menu">
+          <% if(!currUser) { %>
+            <a href="/signup">Sign up</a>
+            <a href="/login">Log in</a>
+            <% } else { %>
+              <a href="/listings/new">Host your home</a>
+              <a href="/logout">Log out</a>
+              <% } %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Search Bar -->
+  <div class="navbar-search-mobile">
+    <form action="/listings" method="GET">
+      <div class="mobile-search-wrapper">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" name="search" placeholder="Where to?"
+          value="<%= typeof search !== 'undefined' ? search : '' %>">
+      </div>
+    </form>
+  </div>
+</nav>
+
+<!-- Category Filters -->
+<div class="category-filters">
+  <div class="category-container">
+    <div class="category-scroll">
+      <a href="/listings" class="category-item active">
+        <i class="fa-solid fa-fire"></i>
+        <span>Trending</span>
+      </a>
+      <a href="/listings?category=beach" class="category-item">
+        <i class="fa-solid fa-umbrella-beach"></i>
+        <span>Beachfront</span>
+      </a>
+      <a href="/listings?category=cabin" class="category-item">
+        <i class="fa-solid fa-house"></i>
+        <span>Cabins</span>
+      </a>
+      <a href="/listings?category=views" class="category-item">
+        <i class="fa-solid fa-mountain"></i>
+        <span>Amazing views</span>
+      </a>
+      <a href="/listings?category=countryside" class="category-item">
+        <i class="fa-solid fa-tree"></i>
+        <span>Countryside</span>
+      </a>
+      <a href="/listings?category=pool" class="category-item">
+        <i class="fa-solid fa-water-ladder"></i>
+        <span>Amazing pools</span>
+      </a>
+      <a href="/listings?category=castle" class="category-item">
+        <i class="fa-brands fa-fort-awesome"></i>
+        <span>Castles</span>
+      </a>
+      <a href="/listings?category=camping" class="category-item">
+        <i class="fa-solid fa-campground"></i>
+        <span>Camping</span>
+      </a>
+      <a href="/listings?category=arctic" class="category-item">
+        <i class="fa-regular fa-snowflake"></i>
+        <span>Arctic</span>
+      </a>
+      <a href="/listings?category=farm" class="category-item">
+        <i class="fa-solid fa-tractor"></i>
+        <span>Farms</span>
+      </a>
+    </div>
+    <button class="filter-btn">
+      <i class="fa-solid fa-sliders"></i>
+      <span>Filters</span>
+    </button>
+  </div>
+</div>
