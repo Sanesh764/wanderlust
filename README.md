@@ -7,6 +7,12 @@
 ![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-brightgreen)
 ![License](https://img.shields.io/badge/License-ISC-yellow)
 
+## 🌐 Live Demo
+
+**Try the live application:** [https://wanderlust-4c1x.onrender.com/listings](https://wanderlust-4c1x.onrender.com/listings)
+
+> 🚀 The application is deployed on Render and ready to use!
+
 ---
 
 ## ✨ Features
