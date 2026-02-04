@@ -1,4 +1,10 @@
+<div align="center">
+
+![Wanderlust Icon](wanderlust-icon.png)
+
 # 🏡 Wanderlust
+
+</div>
 
 **Wanderlust** is a full-stack web application inspired by Airbnb that allows users to explore, list, and review vacation rentals around the world. Built with modern web technologies, it provides a seamless experience for property owners and travelers alike.
 
