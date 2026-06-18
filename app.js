@@ -19,7 +19,14 @@ const listingRouter = require("./routes/listing.js");
 const reviewRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
 
-const dburl = process.env.MONGO_URL;
+const dburl = process.env.MONGO_URL || "mongodb://127.0.0.1:27017/wanderlust";
+const secret = process.env.SECRET || "mysupersecretkey";
+
+const dns=require("dns")
+dns.setServers([
+    '1.1.1.1',
+    '8.8.8.8'
+]);
 
 main()
   .then(() => {
@@ -47,7 +54,7 @@ app.use(express.static(path.join(__dirname, "/public")));
 const store = MongoStore.create({
   mongoUrl: dburl,
   crypto: {
-    secret: process.env.SECRET
+    secret: secret
   },
   touchAfter: 24 * 3600,
 });
@@ -58,7 +65,7 @@ store.on("error", (err) => {
 
 const sessionOptions = {
   store,
-  secret: process.env.SECRET ,
+  secret: secret,
   resave: false,
   saveUninitialized: true,
   cookie: {
@@ -102,8 +109,9 @@ app.use((err, req, res, next) => {
   res.status(statusCode).render("error.ejs", { err, message });
 });
 
-app.listen(8080, () => {
-  console.log("server is listening to port 8080");
+const port=process.env.PORT || 3000;
+app.listen(port, () => {
+  console.log(`server is listening on Port number ${port}`);
 });
 
 
