@@ -92,6 +92,7 @@ app.use((req, res, next) => {
   res.locals.error = req.flash("error");
   res.locals.deleteMsg = req.flash("delete");  // ✅ This must be here
   res.locals.currUser = req.user;
+  res.locals.category = req.query.category || "";
   next();
 });
 

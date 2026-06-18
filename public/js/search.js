@@ -166,4 +166,29 @@ document.addEventListener('DOMContentLoaded', function () {
             }, 3000);
         }
     }
+
+    // ==================== DARK MODE TOGGLE ====================
+    const themeToggleBtn = document.getElementById('themeToggleBtn');
+    if (themeToggleBtn) {
+        const icon = themeToggleBtn.querySelector('i');
+        
+        // Sync icon on page load based on current attribute set by head script
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        if (icon) {
+            icon.className = currentTheme === 'dark' ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
+        }
+
+        themeToggleBtn.addEventListener('click', function () {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            document.documentElement.setAttribute('data-bs-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            if (icon) {
+                icon.className = newTheme === 'dark' ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
+            }
+        });
+    }
 });

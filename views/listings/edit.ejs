@@ -1,53 +1,68 @@
 <% layout("layouts/boilerplate") %>
-  <h3>Edit your Listing</h3>
-  <form method="POST" action="/listings/<%= listing._id %>?_method=PUT" novalidate class="needs-validation"
-    enctype="multipart/form-data">
-    <div class="row mt-3">
-      <div class="col-8 offset-2">
+<div class="row">
+  <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1 col-12">
+    <div class="listing-form-card">
+      <h3>Edit your Listing</h3>
+      
+      <form method="POST" action="/listings/<%= listing._id %>?_method=PUT" novalidate class="needs-validation" enctype="multipart/form-data">
         <div class="mb-3">
-          <label for="title" class="form-label">title</label>
-          <input name="listing[title]" value="<%= listing.title %>" type="text" class="form-control" required />
-          <div class="invalid-feedback">title should be valid</div>
+          <label for="title" class="form-label">Property Title</label>
+          <input name="listing[title]" value="<%= listing.title %>" type="text" class="form-control" id="title" required />
+          <div class="invalid-feedback">Title should be valid.</div>
         </div>
 
         <div class="mb-3">
-          <label for="description" class="form-label">description</label>
-          <textarea name="listing[description]" class="form-control" required><%= listing.description %></textarea>
-          <div class="invalid-feedback">description should be valid</div>
+          <label for="description" class="form-label">Description</label>
+          <textarea name="listing[description]" class="form-control" id="description" rows="5" required><%= listing.description %></textarea>
+          <div class="invalid-feedback">Description should be valid.</div>
         </div>
 
         <div class="mb-3">
-          original Lisiting image <br>
-          <img src="<%= originalImageUrl%>"/>
+          <label class="form-label d-block">Current Listing Image</label>
+          <div class="border rounded p-2 d-inline-block bg-light">
+            <% if(originalImageUrl) { %>
+              <img src="<%= originalImageUrl %>" class="img-thumbnail" style="max-height: 120px; object-fit: cover;" alt="current image" />
+            <% } else { %>
+              <span class="text-muted small">No image uploaded</span>
+            <% } %>
+          </div>
         </div>
 
         <div class="mb-3">
-          <label for="image" class="form-label">upload new image</label>
-          <input name="listing[image][url]" type="file" class="form-control" />
-          <small class="form-text text-muted">Leave empty to keep current image</small>
+          <label for="image" class="form-label">Upload New Image</label>
+          <input name="listing[image][url]" type="file" class="form-control" id="image" />
+          <small class="form-text text-muted">Leave empty to keep your current listing image.</small>
         </div>
 
-        <div class="mb-3">
-          <label for="price" class="form-label">price</label>
-          <input name="listing[price]" value="<%= listing.price %>" type="text" class="form-control" required />
-          <div class="invalid-feedback">price should be valid</div>
+        <div class="row">
+          <div class="mb-3 col-sm-4 col-12">
+            <label for="price" class="form-label">Price per Night (₹)</label>
+            <input name="listing[price]" value="<%= listing.price %>" type="number" class="form-control" id="price" min="0" required />
+            <div class="invalid-feedback">Price should be valid.</div>
+          </div>
+
+          <div class="mb-3 col-sm-8 col-12">
+            <label for="country" class="form-label">Country</label>
+            <input name="listing[country]" value="<%= listing.country %>" type="text" class="form-control" id="country" required />
+            <div class="invalid-feedback">Country name should be valid.</div>
+          </div>
         </div>
 
-        <div class="mb-3">
-          <label for="country" class="form-label">country</label>
-          <input name="listing[country]" value="<%= listing.country %>" type="text" class="form-control" required />
-          <div class="invalid-feedback">country name should be valid</div>
+        <div class="mb-4">
+          <label for="location" class="form-label">Location Address</label>
+          <input name="listing[location]" value="<%= listing.location %>" type="text" class="form-control" id="location" required />
+          <div class="invalid-feedback">Location should be valid.</div>
         </div>
 
-        <div class="mb-3">
-          <label for="location" class="form-label">location</label>
-          <input name="listing[location]" value="<%= listing.location %>" type="text" class="form-control" required />
-          <div class="invalid-feedback">location should be valid</div>
+        <div class="d-flex justify-content-between align-items-center">
+          <a href="/listings/<%= listing._id %>" class="btn btn-link cancel-link font-weight-bold p-0 text-decoration-none">
+            <i class="fa-solid fa-angle-left"></i> Cancel and Go Back
+          </a>
+          <button type="submit" class="btn btn-primary-airbnb px-4 py-2.5">
+            <i class="fa-solid fa-check"></i> Save Changes
+          </button>
         </div>
-
-        <button class="btn btn-dark edit-btn mt-3">Edit</button>
-      </div>
+      </form>
     </div>
-  </form>
-
-  <script src="/js/script.js"></script>
+  </div>
+</div>

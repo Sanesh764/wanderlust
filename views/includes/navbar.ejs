@@ -4,8 +4,8 @@
     <!-- Logo Section -->
     <div class="navbar-logo">
       <a href="/listings">
-        <i class="fa-brands fa-airbnb"></i>
-        <span class="logo-text">wanderlust</span>
+        <i class="fa-solid fa-compass"></i>
+        <span class="logo-text">Wanderlust</span>
       </a>
     </div>
 
@@ -14,26 +14,11 @@
       <form action="/listings" method="GET" class="search-form">
         <div class="search-wrapper">
           <div class="search-input-group">
-            <label>Where</label>
+            <label>Destination</label>
             <input type="text" name="search" placeholder="Search destinations"
               value="<%= typeof search !== 'undefined' ? search : '' %>" autocomplete="off">
           </div>
-          <div class="search-divider"></div>
-          <div class="search-input-group">
-            <label>Check in</label>
-            <input type="text" placeholder="Add dates" readonly>
-          </div>
-          <div class="search-divider"></div>
-          <div class="search-input-group">
-            <label>Check out</label>
-            <input type="text" placeholder="Add dates" readonly>
-          </div>
-          <div class="search-divider"></div>
-          <div class="search-input-group guests-input">
-            <label>Guests</label>
-            <input type="text" placeholder="Add guests" readonly>
-          </div>
-          <button type="submit" class="search-btn">
+          <button type="submit" class="search-btn" aria-label="Submit search">
             <i class="fa-solid fa-magnifying-glass"></i>
           </button>
         </div>
@@ -42,23 +27,41 @@
 
     <!-- Right Side Menu -->
     <div class="navbar-menu">
-      <a href="/listings/new" class="airbnb-home-link">
-        Airbnb your home
+      <a href="/listings" class="airbnb-home-link d-none d-sm-inline-block">
+        Home
       </a>
+      <a href="/listings" class="airbnb-home-link d-none d-sm-inline-block">
+        Explore
+      </a>
+      <% if(currUser) { %>
+        <a href="/listings/new" class="airbnb-create-btn">
+          Create Listing
+        </a>
+      <% } %>
+
+      <!-- Theme Toggle Button -->
+      <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle dark/light theme" type="button">
+        <i class="fa-solid fa-sun"></i>
+      </button>
 
       <div class="user-menu">
-        <button class="menu-toggle">
+        <button class="menu-toggle" id="userMenuBtn" aria-expanded="false" aria-label="User options menu">
           <i class="fa-solid fa-bars"></i>
           <i class="fa-solid fa-circle-user"></i>
         </button>
-        <div class="dropdown-menu">
+        <div class="dropdown-menu" id="userDropdown">
           <% if(!currUser) { %>
             <a href="/signup">Sign up</a>
             <a href="/login">Log in</a>
-            <% } else { %>
-              <a href="/listings/new">Host your home</a>
-              <a href="/logout">Log out</a>
-              <% } %>
+          <% } else { %>
+            <div class="px-3 py-2 text-muted small border-bottom mb-1">
+              Welcome, <strong><%= currUser.username %></strong>!
+            </div>
+            <a href="/listings/new" class="d-md-none">Create Listing</a>
+            <a href="/listings">Explore Listings</a>
+            <div class="dropdown-divider"></div>
+            <a href="/logout">Log out</a>
+          <% } %>
         </div>
       </div>
     </div>
@@ -80,43 +83,43 @@
 <div class="category-filters">
   <div class="category-container">
     <div class="category-scroll">
-      <a href="/listings" class="category-item active">
+      <a href="/listings" class="category-item <%= (typeof category === 'undefined' || !category) ? 'active' : '' %>">
         <i class="fa-solid fa-fire"></i>
         <span>Trending</span>
       </a>
-      <a href="/listings?category=beach" class="category-item">
+      <a href="/listings?category=beach" class="category-item <%= (typeof category !== 'undefined' && category === 'beach') ? 'active' : '' %>">
         <i class="fa-solid fa-umbrella-beach"></i>
         <span>Beachfront</span>
       </a>
-      <a href="/listings?category=cabin" class="category-item">
+      <a href="/listings?category=cabin" class="category-item <%= (typeof category !== 'undefined' && category === 'cabin') ? 'active' : '' %>">
         <i class="fa-solid fa-house"></i>
         <span>Cabins</span>
       </a>
-      <a href="/listings?category=views" class="category-item">
+      <a href="/listings?category=views" class="category-item <%= (typeof category !== 'undefined' && category === 'views') ? 'active' : '' %>">
         <i class="fa-solid fa-mountain"></i>
         <span>Amazing views</span>
       </a>
-      <a href="/listings?category=countryside" class="category-item">
+      <a href="/listings?category=countryside" class="category-item <%= (typeof category !== 'undefined' && category === 'countryside') ? 'active' : '' %>">
         <i class="fa-solid fa-tree"></i>
         <span>Countryside</span>
       </a>
-      <a href="/listings?category=pool" class="category-item">
+      <a href="/listings?category=pool" class="category-item <%= (typeof category !== 'undefined' && category === 'pool') ? 'active' : '' %>">
         <i class="fa-solid fa-water-ladder"></i>
         <span>Amazing pools</span>
       </a>
-      <a href="/listings?category=castle" class="category-item">
+      <a href="/listings?category=castle" class="category-item <%= (typeof category !== 'undefined' && category === 'castle') ? 'active' : '' %>">
         <i class="fa-brands fa-fort-awesome"></i>
         <span>Castles</span>
       </a>
-      <a href="/listings?category=camping" class="category-item">
+      <a href="/listings?category=camping" class="category-item <%= (typeof category !== 'undefined' && category === 'camping') ? 'active' : '' %>">
         <i class="fa-solid fa-campground"></i>
         <span>Camping</span>
       </a>
-      <a href="/listings?category=arctic" class="category-item">
+      <a href="/listings?category=arctic" class="category-item <%= (typeof category !== 'undefined' && category === 'arctic') ? 'active' : '' %>">
         <i class="fa-regular fa-snowflake"></i>
         <span>Arctic</span>
       </a>
-      <a href="/listings?category=farm" class="category-item">
+      <a href="/listings?category=farm" class="category-item <%= (typeof category !== 'undefined' && category === 'farm') ? 'active' : '' %>">
         <i class="fa-solid fa-tractor"></i>
         <span>Farms</span>
       </a>

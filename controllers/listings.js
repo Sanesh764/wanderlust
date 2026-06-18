@@ -2,14 +2,41 @@ const { response } = require("express");
 const Listing = require("../models/listing");
 
 module.exports.index = async (req, res) => {
-  const { search } = req.query;
+  const { search, category } = req.query;
   let allListings;
 
   if (search) {
-    // Search listings by title (case-insensitive)
+    // Search listings by title, location, country, or description (case-insensitive)
+    let regex = new RegExp(search, 'i');
     allListings = await Listing.find({
-      title: { $regex: search, $options: 'i' }
+      $or: [
+        { title: regex },
+        { location: regex },
+        { country: regex },
+        { description: regex }
+      ]
     });
+  } else if (category) {
+    // Smart keyword matching for categories
+    let keywords = [category];
+    if (category === 'views') keywords.push('view', 'mountain', 'lake', 'hill', 'river', 'nature');
+    if (category === 'pool') keywords.push('pool', 'swimming', 'jacuzzi');
+    if (category === 'cabin') keywords.push('cabin', 'cottage', 'wood', 'chalet');
+    if (category === 'camping') keywords.push('camp', 'tent', 'camping', 'outdoor');
+    if (category === 'arctic') keywords.push('snow', 'ice', 'cold', 'winter', 'glacier');
+    if (category === 'farm') keywords.push('farm', 'farmhouse', 'barn', 'rural', 'ranch');
+    if (category === 'beach') keywords.push('beach', 'beachfront', 'sea', 'ocean', 'coast', 'waterfront');
+
+    let orQueries = keywords.map(keyword => {
+      let regex = new RegExp(keyword, 'i');
+      return [
+        { title: regex },
+        { description: regex },
+        { location: regex }
+      ];
+    }).flat();
+
+    allListings = await Listing.find({ $or: orQueries });
   } else {
     allListings = await Listing.find({});
   }

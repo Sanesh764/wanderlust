@@ -1,50 +1,57 @@
 <% layout("layouts/boilerplate") %>
-  <div class="row">
-    <div class="col-8 offset-2">
+<div class="row">
+  <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1 col-12">
+    <div class="listing-form-card">
       <h3>Create a New Listing</h3>
+      
       <form method="POST" action="/listings" novalidate class="needs-validation" enctype="multipart/form-data">
         <div class="mb-3">
-          <label for="title" class="form-label">Title</label>
-          <input name="listing[title]" placeholder="Add a catchy title" type="text" class="form-control" required />
-          <div class="invalid-feedback">Title is required</div>
+          <label for="title" class="form-label">Property Title</label>
+          <input name="listing[title]" placeholder="Enter a catchy title (e.g. Cozy Beachfront Villa)" type="text" class="form-control" id="title" required />
+          <div class="invalid-feedback">A property title is required.</div>
         </div>
 
         <div class="mb-3">
           <label for="description" class="form-label">Description</label>
-          <textarea name="listing[description]" placeholder="Enter description" class="form-control"
-            required></textarea>
-          <div class="invalid-feedback">Description is required</div>
+          <textarea name="listing[description]" placeholder="Write details about your property, amenities, nearby attractions, and general vibes..." class="form-control" id="description" rows="5" required></textarea>
+          <div class="invalid-feedback">Please provide a description of the property.</div>
         </div>
 
         <div class="mb-3">
-          <label for="image" class="form-label">uplode listing images</label>
-          <input name="listing[image][url]"  type="file" class="form-control" />
-          <small class="form-text text-muted">Leave blank to use default image</small>
-          required
+          <label for="image" class="form-label">Upload Listing Image</label>
+          <input name="listing[image][url]" type="file" class="form-control" id="image" />
+          <small class="form-text text-muted">Leave empty to use our fallback placeholder image.</small>
         </div>
 
         <div class="row">
-          <div class="mb-3 col-4">
-            <label for="price" class="form-label">Price</label>
-            <input name="listing[price]" placeholder="Enter price" type="number" class="form-control" required />
-            <div class="invalid-feedback">Price is required</div>
+          <div class="mb-3 col-sm-4 col-12">
+            <label for="price" class="form-label">Price per Night (₹)</label>
+            <input name="listing[price]" placeholder="1200" type="number" class="form-control" id="price" min="0" required />
+            <div class="invalid-feedback">Please enter a valid price.</div>
           </div>
 
-          <div class="mb-3 col-md-8">
+          <div class="mb-3 col-sm-8 col-12">
             <label for="country" class="form-label">Country</label>
-            <input name="listing[country]" placeholder="Enter country" type="text" class="form-control" required />
-            <div class="invalid-feedback">Country name is required</div>
+            <input name="listing[country]" placeholder="India" type="text" class="form-control" id="country" required />
+            <div class="invalid-feedback">Please specify the country.</div>
           </div>
         </div>
 
-        <div class="mb-3">
-          <label for="location" class="form-label">Location</label>
-          <input name="listing[location]" placeholder="Enter location" type="text" class="form-control" required />
-          <div class="invalid-feedback">Location is required</div>
+        <div class="mb-4">
+          <label for="location" class="form-label">Location Address</label>
+          <input name="listing[location]" placeholder="Goa, Maharashtra" type="text" class="form-control" id="location" required />
+          <div class="invalid-feedback">Please enter the location address.</div>
         </div>
 
-        <br /><br />
-        <button class="btn btn-dark add-btn">Add</button>
+        <div class="d-flex justify-content-between align-items-center">
+          <a href="/listings" class="btn btn-link cancel-link font-weight-bold p-0 text-decoration-none">
+            <i class="fa-solid fa-angle-left"></i> Cancel and Go Back
+          </a>
+          <button type="submit" class="btn btn-primary-airbnb px-4 py-2.5">
+            <i class="fa-solid fa-cloud-arrow-up"></i> Publish Listing
+          </button>
+        </div>
       </form>
     </div>
   </div>
+</div>
