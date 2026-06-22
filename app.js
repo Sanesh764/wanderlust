@@ -3,6 +3,7 @@ if (process.env.NODE_ENV !== "production") {
 }
 const express = require('express');
 const app = express();
+
 const mongoose = require("mongoose");
 const path = require("path");
 const methodOverride = require("method-override");
@@ -19,7 +20,7 @@ const listingRouter = require("./routes/listing.js");
 const reviewRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
 
-const dburl = process.env.MONGO_URL || "mongodb://127.0.0.1:27017/wanderlust";
+const dburl = process.env.MONGO_URL || "mongodb://127.0.0.1:27017/wanderlust";//fefault save database in  local storage
 const secret = process.env.SECRET || "mysupersecretkey";
 
 const dns=require("dns")
