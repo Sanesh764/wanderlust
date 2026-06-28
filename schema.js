@@ -1,5 +1,7 @@
 const Joi = require("joi");
-
+//ye server side validation error check karne ke liye use karte h ,like agar koi hopschoch say request
+//send kar raha hai to usko bhi toh cheak karna h sab sahi formet me data hai ki nhi
+//method 1 har field ko if else conditon ke help say cheak karo otherwise best use joi ka use karo
 module.exports.listingSchema = Joi.object({
   listing: Joi.object({
     title: Joi.string().required(),

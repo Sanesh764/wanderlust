@@ -16,9 +16,7 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user.js");
 
-const listingRouter = require("./routes/listing.js");
-const reviewRouter = require("./routes/review.js");
-const userRouter = require("./routes/user.js");
+
 
 const dburl = process.env.MONGO_URL || "mongodb://127.0.0.1:27017/wanderlust";//fefault save database in  local storage
 const secret = process.env.SECRET || "mysupersecretkey";
@@ -97,6 +95,11 @@ app.use((req, res, next) => {
   next();
 });
 
+
+const listingRouter = require("./routes/listing.js");
+const reviewRouter = require("./routes/review.js");
+const userRouter = require("./routes/user.js");
+
 // ✅ Finally, your routes
 app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
@@ -106,8 +109,9 @@ app.all("*", (req, res, next) => {
   next(new ExpressError(404, "page not found!"));
 });
 
+//middleware
 app.use((err, req, res, next) => {
-  let { statusCode = 500, message = "Something went wrong" } = err;
+  let { statusCode = 500, message = "Something went wrong !!!!!!" } = err;
   res.status(statusCode).render("error.ejs", { err, message });
 });
 
